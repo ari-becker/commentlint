@@ -1,0 +1,9 @@
+# Configuration for commentlint in this directory and its subdirectories.
+# Every key is optional; see README.md for the full reference.
+
+# Rule ids to turn off here. Use `enable = [...]` in a nested directory to
+# turn a rule back on for that subtree.
+disable = []
+
+# Comments with fewer words than this are not sent for evaluation.
+min_words = 3

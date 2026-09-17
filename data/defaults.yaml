@@ -1,0 +1,47 @@
+# Default configuration for commentlint.
+#
+# This file is compiled into the binary with include_str! and parsed at
+# startup. Every `.commentlint.toml` found between the working directory and a
+# file's own directory is merged on top of it, outermost first, so the
+# configuration closest to the file being evaluated has the final say.
+
+# A rule fails when the probability TypeSafe.ai returns is below this value.
+threshold: 0.5
+
+# The TypeSafe.ai model that evaluates each comment.
+model: jev-latest
+
+# Comments with fewer words than this are not evaluated.
+min_words: 3
+
+# Comments that start with one of these prefixes (after the comment
+# delimiters are stripped) are tool directives, not prose, and are skipped.
+ignore_prefixes:
+  - "eslint-"
+  - "prettier-ignore"
+  - "noqa"
+  - "type:"
+  - "pylint:"
+  - "pyright:"
+  - "mypy:"
+  - "nolint"
+  - "rustfmt::"
+  - "clippy::"
+  - "@ts-"
+  - "-*-"
+  - "fmt:"
+  - "region"
+  - "endregion"
+  - "SPDX-"
+  - "shellcheck"
+  - "!/"
+
+# Each rule is a TypeSafe.ai Noul question. `instructions` asks the yes/no
+# question; `criteria.true` and `criteria.false` describe what each answer
+# means. A rule may set its own `threshold`.
+rules:
+  active_voice:
+    instructions: "Is the text written in the active voice?"
+    criteria:
+      "true": "the grammatical subject of the sentence is the person or thing performing the action"
+      "false": "the grammatical subject of the sentence is the person or thing being acted upon"

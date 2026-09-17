@@ -1,0 +1,30 @@
+# Hook definitions for https://pre-commit.com
+#
+# Add to your .pre-commit-config.yaml:
+#
+#   repos:
+#     - repo: https://github.com/ari-becker/commentlint
+#       rev: v0.1.0
+#       hooks:
+#         - id: commentlint
+#
+# `commentlint` builds the tool from source with cargo (pre-commit manages the
+# toolchain). `commentlint-system` instead uses a binary already on PATH, for
+# example one installed with `brew install ari-becker/commentlint/commentlint`.
+
+- id: commentlint
+  name: commentlint
+  description: Lint code comments with TypeSafe.ai.
+  entry: commentlint
+  language: rust
+  types: [text]
+  pass_filenames: true
+  require_serial: true
+- id: commentlint-system
+  name: commentlint (installed binary)
+  description: Lint code comments with TypeSafe.ai using a preinstalled commentlint binary.
+  entry: commentlint
+  language: system
+  types: [text]
+  pass_filenames: true
+  require_serial: true
